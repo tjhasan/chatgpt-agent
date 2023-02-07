@@ -15,22 +15,12 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
 
-client.on("messageCreate", async (message) => {
-  if (message.content == "qwerty") {
-    await message.reply("asdf");
-  }
-});
-
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
-  const command = pingExecute;
-
-  if (!command) {
-    console.error(
-      `This shouldn't happen. ${interaction.commandName} doesn't exist.`
-    );
-    return;
+  let command = null;
+  if (interaction.commandName == "ping") {
+    command = pingExecute;
   }
 
   try {
