@@ -11,6 +11,7 @@
 *.sln.docstates
 *openai-key.*
 bot-token.txt
+.env
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

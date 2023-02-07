@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/tjhasan/chatgpt-agent/issues"
   },
-  "homepage": "https://github.com/tjhasan/chatgpt-agent#readme"
+  "homepage": "https://github.com/tjhasan/chatgpt-agent#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "prettier": "^2.8.3"
+  }
 }
