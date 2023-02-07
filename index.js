@@ -13,8 +13,7 @@ const client = new Client({
   ],
 });
 
-// client.commands = new Collection();
-
+// client auth
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
@@ -26,9 +25,17 @@ client.on("messageCreate", async (message) => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
+  console.log(interaction)
   if (!interaction.isChatInputCommand()) return;
 
-  const command = pingExecute;
+  let command = null;
+
+  if(interaction.commandName == "ping") {
+    command = pingExecute;
+  }
+  else if(interaction.commandName == "chat") {
+
+  }
 
   if (!command) {
     console.error(
@@ -48,5 +55,4 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 });
 
-console.log(process.env.DISCORD_BOT_TOKEN)
 client.login(process.env.DISCORD_BOT_TOKEN);
