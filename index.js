@@ -1,6 +1,7 @@
 import "dotenv/config.js";
 import { Client, GatewayIntentBits, Collection, Events } from "discord.js";
-import { execute as pingExecute, data as pingData } from "./commands/ping.js";
+import { execute as pingExecute } from "./commands/ping.js";
+import { execute as chatGptExecute } from "./commands/chatgpt.js";
 
 // intialize client
 const client = new Client({
@@ -16,11 +17,24 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
 
+// client looks for commands -- interaction is command object
 client.on(Events.InteractionCreate, async (interaction) => {
-  console.log(interaction);
+
+  // ensure that command is a chat input command
   if (!interaction.isChatInputCommand()) return;
 
-  const command = pingExecute;
+  // create command variable that will store the function to execute
+  let command = null;
+
+  // Check which command we are using and assign the import to the the command variable
+  // Find command names in the respective files in the 'commands' folder
+  if(interaction.commandName == "ping") {
+    command = pingExecute;
+  }
+  else if(interaction.commandName == "chat") {
+    command = chatGptExecute;
+  }
+
 
   if (!command) {
     console.error(
@@ -40,5 +54,4 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 });
 
-console.log(process.env.DISCORD_BOT_TOKEN);
 client.login(process.env.DISCORD_BOT_TOKEN);
