@@ -11,16 +11,22 @@ const client = new Client({
   ],
 });
 
+// client auth
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
+  console.log(interaction);
   if (!interaction.isChatInputCommand()) return;
 
-  let command = null;
-  if (interaction.commandName == "ping") {
-    command = pingExecute;
+  const command = pingExecute;
+
+  if (!command) {
+    console.error(
+      `This shouldn't happen. ${interaction.commandName} doesn't exist.`
+    );
+    return;
   }
 
   try {
