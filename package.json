@@ -2,6 +2,7 @@
   "name": "chatgpt-agent",
   "version": "1.0.0",
   "description": "Simple agent for discord users to interact with chatGPT AI at a low level.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

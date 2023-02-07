@@ -1,9 +1,10 @@
-require("dotenv").config();
-const fs = require("node:fs");
-const path = require("node:path");
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
+import "dotenv/config.js";
+import { Client, GatewayIntentBits, Collection, Events } from "discord.js";
+import {execute as pingExecute, data as pingData} from "./commands/ping.js"
 
-const { Client, GatewayIntentBits, Collection, Events } = require("discord.js");
-
+// intialize client
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -12,26 +13,7 @@ const client = new Client({
   ],
 });
 
-client.commands = new Collection();
-
-const commandsPath = path.join(__dirname, "commands");
-
-const commandFiles = fs
-  .readdirSync(commandsPath)
-  .filter((file) => file.endsWith(".js"));
-
-for (const file of commandFiles) {
-  const filePath = path.join(commandsPath, file);
-  const command = require(filePath);
-
-  if ("data" in command && "execute" in command) {
-    client.commands.set(command.data.name, command);
-  } else {
-    console.log(
-      `WAIT!! Command at ${filePath} is missing 'data' or 'execute' property`
-    );
-  }
-}
+// client.commands = new Collection();
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -46,7 +28,7 @@ client.on("messageCreate", async (message) => {
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
-  const command = interaction.client.commands.get(interaction.commandName);
+  const command = pingExecute;
 
   if (!command) {
     console.error(
@@ -56,7 +38,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 
   try {
-    await command.execute(interaction);
+    await command(interaction);
   } catch (error) {
     console.error(error);
     await interaction.reply({
@@ -65,5 +47,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
     });
   }
 });
-
+console.log(process.env.DISCORD_BOT_TOKEN)
 client.login(process.env.DISCORD_BOT_TOKEN);
