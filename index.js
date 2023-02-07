@@ -1,8 +1,6 @@
-import { readdirSync } from "node:fs";
-import { join } from "node:path";
 import "dotenv/config.js";
 import { Client, GatewayIntentBits, Collection, Events } from "discord.js";
-import {execute as pingExecute, data as pingData} from "./commands/ping.js"
+import { execute as pingExecute, data as pingData } from "./commands/ping.js";
 
 // intialize client
 const client = new Client({
@@ -12,8 +10,6 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
-
-// client.commands = new Collection();
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -48,5 +44,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 });
 
-console.log(process.env.DISCORD_BOT_TOKEN)
+console.log(process.env.DISCORD_BOT_TOKEN);
 client.login(process.env.DISCORD_BOT_TOKEN);
