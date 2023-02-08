@@ -13,7 +13,7 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction, client) {
     let queue = client.player.createQueue(interaction.guild.id);
-    await queue.join(interaction.member.voice.channel.id);
+    await queue.join(interaction.member.voice.channel);
     
     let song = await queue.play(interaction.options.getString("song")).catch(err => {
         console.log(err);
