@@ -7,7 +7,7 @@ async function completion(prompt) {
   let response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: prompt,
-    max_tokens: 256,
+    max_tokens: 4000,
     echo: true,
   });
 
