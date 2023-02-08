@@ -1,3 +1,4 @@
+import { SlashCommandBuilder } from "discord.js";
 import { openai } from "../OpenAI/openAIroutes.js";
 
 async function completion(prompt) {
