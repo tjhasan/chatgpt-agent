@@ -3,11 +3,13 @@ import "dotenv/config.js";
 
 import { data as chatGptData } from "./commands/chatgpt.js";
 import { data as pingData } from "./commands/ping.js";
+import { data as dalleData } from "./commands/dall-e.js";
 
 const commands = [];
 
 commands.push(pingData);
 commands.push(chatGptData);
+commands.push(dalleData);
 
 // Construct and prepare an instance of the REST module
 const rest = new REST({ version: "10" }).setToken(
