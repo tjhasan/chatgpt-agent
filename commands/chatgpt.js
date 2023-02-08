@@ -1,14 +1,8 @@
 import { SlashCommandBuilder } from "discord.js";
 import "dotenv/config.js";
-import { Configuration, OpenAIApi } from "openai";
+// import { Configuration, OpenAIApi } from "openai";
 
-//import { openai } from "../OpenAI/openAIroutes.js"
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_TOKEN,
-});
-
-const openai = new OpenAIApi(configuration);
+import { openai } from "../OpenAI/openAIroutes.js";
 
 async function completion(prompt) {
   let response = await openai.createCompletion({
@@ -33,8 +27,9 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction) {
   let prompt = interaction.options.getString("input");
-  console.log(prompt);
+
   let response = await completion(prompt);
   console.log(response);
+
   await interaction.reply(response.data.choices[0].text);
 }

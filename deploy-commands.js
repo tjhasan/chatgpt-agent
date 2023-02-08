@@ -9,8 +9,6 @@ const commands = [];
 commands.push(pingData);
 commands.push(chatGptData);
 
-console.log(commands)
-
 // Construct and prepare an instance of the REST module
 const rest = new REST({ version: "10" }).setToken(
   process.env.DISCORD_BOT_TOKEN
