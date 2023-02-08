@@ -28,7 +28,7 @@ export async function execute(interaction) {
   let prompt = interaction.options.getString("input");
 
   let response = await completion(prompt);
-  // console.log(response);
+  console.log(response.data);
 
   if(response.data.choices[0].text) {
     return response.data.choices[0].text;
