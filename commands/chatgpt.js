@@ -11,14 +11,15 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 async function completion(prompt) {
-    let response = await openai.createCompletion({
+  let response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: prompt,
     max_tokens: 256,
-    })
+    echo: true,
+  });
 
-    return response;
-};
+  return response;
+}
 
 export const data = new SlashCommandBuilder()
   .setName("chat")
@@ -34,6 +35,6 @@ export async function execute(interaction) {
   let prompt = interaction.options.getString("input");
   console.log(prompt);
   let response = await completion(prompt);
-  console.log(response)
+  console.log(response);
   await interaction.reply(response.data.choices[0].text);
 }
