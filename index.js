@@ -4,6 +4,7 @@ import { execute as pingExecute } from "./commands/ping.js";
 import { execute as chatGptExecute } from "./commands/chatgpt.js";
 import { execute as chatGptVoiceExecute } from "./commands/chatgptvoice.js";
 import { execute as dalleExecute } from "./commands/dall-e.js";
+import { Player } from "discord-music-player";
 
 // intialize client
 const client = new Client({
@@ -19,6 +20,13 @@ client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`);
 });
 
+// set up player for the music bot functionality
+const player = new Player(client, {
+  leaveOnEmpty: false, // This options are optional.
+});
+
+client.player = player;
+
 // client looks for commands -- interaction is command object
 client.on(Events.InteractionCreate, async (interaction) => {
   // ensure that command is a chat input command
@@ -27,7 +35,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
   // create command variable that will store the function to execute
   let command = null;
   //check if we are using the voice execute command
-  let voiceFlag = false;
+  let flag = false;
 
   // Check which command we are using and assign the import to the the command variable
   // Find command names in the respective files in the 'commands' folder
@@ -50,7 +58,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 
   try {
-    if(voiceFlag) {
+    if(flag) {
       await interaction.reply("Of course, one second while I think");
       const result = await command(interaction, client);
       await interaction.editReply(result);

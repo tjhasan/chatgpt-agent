@@ -32,9 +32,7 @@ export async function execute(interaction, client) {
 
 
         console.log(interaction.member);
-        const audio = connection.receiver(interaction.member.user.username, { mode: 'pcm' });
-
-        audio.pipe(fs.createWriteStream('user_audio'));
+        
     }
     catch(e) {
         console.log(e);
