@@ -1,6 +1,8 @@
 import { SlashCommandBuilder } from "discord.js";
-
+import "dotenv/config.js";
 import { Configuration, OpenAIApi } from "openai";
+
+//import { openai } from "../OpenAI/openAIroutes.js"
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_TOKEN,
