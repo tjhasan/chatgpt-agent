@@ -7,6 +7,13 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction, client) {
     let guildQueue = client.player.getQueue(interaction.guild.id);
+    let songs = []
+    for(let i = 0; i < guildQueue.songs.length; i++) {
+      let number = i + 1;
+      songs.push(number + ". " + guildQueue.songs[i].name);
+    }
 
-    return String(guildQueue);
+    let finalArray = songs.join('\n')
+
+    return String(finalArray);
 }
