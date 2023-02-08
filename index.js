@@ -62,13 +62,13 @@ client.on(Events.InteractionCreate, async (interaction) => {
         await interaction.editReply(result);
       }
       catch(e) {
-        interaction.reply("this idiot typed " + interaction.options.getString("input"))
+        interaction.editReply("this idiot typed " + interaction.options.getString("input"))
       }
     }
     
   } catch (error) {
     console.error(error);
-    await interaction.reply({
+    await interaction.editReply({
       content:
         "There was an error when trying to execute this command. Let TJ know.",
     });

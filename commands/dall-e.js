@@ -27,19 +27,19 @@ export async function execute(interaction) {
         let prompt = interaction.options.getString("input");
 
         let response = await completion(prompt);
-        console.log(response.data);
+        console.log(response);
 
         if(response?.data) {
             return response.data.data[0].url;
         }
         else {
-            interaction.reply("this idiot typed " + interaction.options.getString("input"))
+            interaction.editReply("this idiot typed " + interaction.options.getString("input"))
         }
 
        
     }
     catch(e) {
-        interaction.reply("this idiot typed " + interaction.options.getString("input"))
+        interaction.editReply("this idiot typed " + interaction.options.getString("input"))
     }
   
 }
