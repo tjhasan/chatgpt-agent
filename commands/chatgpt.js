@@ -30,7 +30,7 @@ export async function execute(interaction) {
   let response = await completion(prompt);
   // console.log(response);
 
-  if(typeof response === 'string') {
+  if(response.data.choices[0].text) {
     return response.data.choices[0].text;
   }
   else {
