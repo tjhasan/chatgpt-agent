@@ -27,6 +27,7 @@ export async function execute(interaction) {
         let prompt = interaction.options.getString("input");
 
         let response = await completion(prompt);
+        console.log(response);
 
         if(response.data.data[0].url) {
             return response.data.data[0].url;
