@@ -44,7 +44,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 
   try {
-    await command(interaction);
+    await interaction.reply("Of course, one second while I think");
+    const result = await command(interaction);
+    await interaction.editReply(result);
   } catch (error) {
     console.error(error);
     await interaction.reply({

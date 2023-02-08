@@ -20,7 +20,7 @@ export const data = new SlashCommandBuilder()
   .addStringOption((option) =>
     option
       .setName("input")
-      .setDescription("What do you want to ask chatGPT")
+      .setDescription("What do you want to ask Mimir")
       .setRequired(true)
   );
 
@@ -30,5 +30,5 @@ export async function execute(interaction) {
   let response = await completion(prompt);
   console.log(response);
 
-  await interaction.reply(response.data.choices[0].text);
+  return response.data.choices[0].text;
 }
