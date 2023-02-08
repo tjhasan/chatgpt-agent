@@ -1,9 +1,7 @@
 import { REST, Routes } from "discord.js";
-import { readdirSync } from "node:fs";
 import "dotenv/config.js";
 
-
-import {data as chatGptData} from "./commands/chatgpt.js"
+import { data as chatGptData } from "./commands/chatgpt.js";
 
 const commands = [];
 
