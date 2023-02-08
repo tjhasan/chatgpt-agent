@@ -29,7 +29,7 @@ export async function execute(interaction) {
         let response = await completion(prompt);
         console.log(response.data);
 
-        if(response.data) {
+        if(response?.data) {
             return response.data.data[0].url;
         }
         else {
