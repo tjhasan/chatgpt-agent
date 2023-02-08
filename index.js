@@ -4,6 +4,20 @@ import { execute as pingExecute } from "./commands/ping.js";
 import { execute as chatGptExecute } from "./commands/chatgpt.js";
 import { execute as chatGptVoiceExecute } from "./commands/chatgptvoice.js";
 import { execute as dalleExecute } from "./commands/dall-e.js";
+import { execute as clearQueueExecute } from "./commands/music/clearQueue.js";
+import { execute as getQueueExecute } from "./commands/music/getQueue.js";
+import { execute as pauseExecute } from "./commands/music/pause.js";
+import { execute as playExecute } from "./commands/music/play.js";
+import { execute as playlistExecute } from "./commands/music/playlist.js";
+import { execute as removeLoopExecute } from "./commands/music/removeLoop.js";
+import { execute as resumeExecute } from "./commands/music/resume.js";
+import { execute as seekExecute } from "./commands/music/seek.js";
+import { execute as setVolumeExecute } from "./commands/music/setVolume.js";
+import { execute as shuffleExecute } from "./commands/music/shuffle.js";
+import { execute as skipExecute } from "./commands/music/skip.js";
+import { execute as stopExecute } from "./commands/music/stop.js";
+import { execute as toggleLoopExecute } from "./commands/music/toggleLoop.js";
+import { execute as toggleQueueLoopExecute } from "./commands/music/toggleQueueLoop.js";
 import { Player } from "discord-music-player";
 
 // intialize client
@@ -45,10 +59,39 @@ client.on(Events.InteractionCreate, async (interaction) => {
     command = chatGptExecute;
   } else if (interaction.commandName == "voice") {
     command = chatGptVoiceExecute;
-    voiceFlag = true;
+    flag = true;
   } else if (interaction.commandName == "vision") {
     command = dalleExecute;
+  } else if (interaction.commandName == "clear_queue") {
+    command = clearQueueExecute;
+  } else if (interaction.commandName == "get_queue") {
+    command = getQueueExecute;
+  } else if (interaction.commandName == "pause") {
+    command = pauseExecute;
+  } else if (interaction.commandName == "play") {
+    command = playExecute;
+  } else if (interaction.commandName == "playlist") {
+    command = playlistExecute;
+  } else if (interaction.commandName == "resume") {
+    command = resumeExecute;
+  } else if (interaction.commandName == "remove_loop") {
+    command = removeLoopExecute;
+  } else if (interaction.commandName == "seek") {
+    command = seekExecute;
+  } else if (interaction.commandName == "set_volume") {
+    command = setVolumeExecute;
+  } else if (interaction.commandName == "shuffle") {
+    command = shuffleExecute;
+  } else if (interaction.commandName == "skip") {
+    command = skipExecute;
+  } else if (interaction.commandName == "stop") {
+    command = stopExecute;
+  } else if (interaction.commandName == "toggle_loop") {
+    command = toggleLoopExecute;
+  } else if (interaction.commandName == "toggle_queue_loop") {
+    command = toggleQueueLoopExecute;
   }
+  
 
   if (!command) {
     console.error(
