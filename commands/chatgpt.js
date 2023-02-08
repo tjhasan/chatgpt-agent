@@ -9,8 +9,9 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const completion = await openai.createCompletion({
-  model: "text-davinci-002",
-  prompt: "Hello world",
+  model: "text-davinci-003",
+  prompt: "What is the meaning of life?",
+  max_tokens: 2056,
 });
 
 export const data = new SlashCommandBuilder()
