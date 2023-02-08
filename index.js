@@ -26,6 +26,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
   // create command variable that will store the function to execute
   let command = null;
+  //check if we are using the voice execute command
+  let voiceFlag = false;
 
   // Check which command we are using and assign the import to the the command variable
   // Find command names in the respective files in the 'commands' folder
@@ -35,6 +37,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     command = chatGptExecute;
   } else if (interaction.commandName == "voice") {
     command = chatGptVoiceExecute;
+    voiceFlag = true;
   } else if (interaction.commandName == "vision") {
     command = dalleExecute;
   }
@@ -47,9 +50,17 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 
   try {
-    await interaction.reply("Of course, one second while I think");
-    const result = await command(interaction);
-    await interaction.editReply(result);
+    if(voiceFlag) {
+      await interaction.reply("Of course, one second while I think");
+      const result = await command(interaction, client);
+      await interaction.editReply(result);
+    }
+    else {
+      await interaction.reply("Of course, one second while I think");
+      const result = await command(interaction);
+      await interaction.editReply(result);
+    }
+    
   } catch (error) {
     console.error(error);
     await interaction.reply({
