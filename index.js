@@ -3,6 +3,7 @@ import { Client, GatewayIntentBits, Collection, Events } from "discord.js";
 import { execute as pingExecute } from "./commands/ping.js";
 import { execute as chatGptExecute } from "./commands/chatgpt.js";
 import { execute as chatGptVoiceExecute } from "./commands/chatgptvoice.js";
+import { execute as dalleExecute } from "./commands/dall-e.js";
 
 // intialize client
 const client = new Client({
@@ -20,7 +21,6 @@ client.on("ready", () => {
 
 // client looks for commands -- interaction is command object
 client.on(Events.InteractionCreate, async (interaction) => {
-
   // ensure that command is a chat input command
   if (!interaction.isChatInputCommand()) return;
 
@@ -29,16 +29,15 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
   // Check which command we are using and assign the import to the the command variable
   // Find command names in the respective files in the 'commands' folder
-  if(interaction.commandName == "ping") {
+  if (interaction.commandName == "ping") {
     command = pingExecute;
-  }
-  else if(interaction.commandName == "chat") {
+  } else if (interaction.commandName == "chat") {
     command = chatGptExecute;
-  }
-  else if(interaction.commandName == "voice") {
+  } else if (interaction.commandName == "voice") {
     command = chatGptVoiceExecute;
+  } else if (interaction.commandName == "vision") {
+    command = dalleExecute;
   }
-
 
   if (!command) {
     console.error(
