@@ -14,7 +14,7 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction, client) {
     let guildQueue = client.player.getQueue(interaction.guild.id);
 
-    guildQueue.setVolume(parseInt(interaction.options.getString("Volume Level")));
+    guildQueue.setVolume(parseInt(interaction.options.getString("volume_level")));
 
-    return ("Mimir set volume to " + interaction.options.getString("Volume Level") ) ;
+    return ("Mimir set volume to " + interaction.options.getString("volume_level") ) ;
 }

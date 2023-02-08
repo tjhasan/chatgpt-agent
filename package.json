@@ -24,8 +24,13 @@
     "discord-music-player": "^9.1.1",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
+    "ffmpeg-static": "^5.1.0",
     "isomorphic-unfetch": "^4.0.2",
     "openai": "^3.1.0",
-    "prettier": "^2.8.3"
+    "prettier": "^2.8.3",
+    "spotify-url-info": "^3.2.3",
+    "youtubei": "^1.1.2",
+    "ytdl-core": "^4.11.2",
+    "ytsr": "^3.8.0"
   }
 }

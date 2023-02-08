@@ -64,32 +64,46 @@ client.on(Events.InteractionCreate, async (interaction) => {
     command = dalleExecute;
   } else if (interaction.commandName == "clear_queue") {
     command = clearQueueExecute;
+    flag = true;
   } else if (interaction.commandName == "get_queue") {
     command = getQueueExecute;
+    flag = true;
   } else if (interaction.commandName == "pause") {
     command = pauseExecute;
+    flag = true;
   } else if (interaction.commandName == "play") {
     command = playExecute;
+    flag = true;
   } else if (interaction.commandName == "playlist") {
     command = playlistExecute;
+    flag = true;
   } else if (interaction.commandName == "resume") {
     command = resumeExecute;
+    flag = true;
   } else if (interaction.commandName == "remove_loop") {
     command = removeLoopExecute;
+    flag = true;
   } else if (interaction.commandName == "seek") {
     command = seekExecute;
+    flag = true;
   } else if (interaction.commandName == "set_volume") {
     command = setVolumeExecute;
+    flag = true;
   } else if (interaction.commandName == "shuffle") {
     command = shuffleExecute;
+    flag = true;
   } else if (interaction.commandName == "skip") {
     command = skipExecute;
+    flag = true;
   } else if (interaction.commandName == "stop") {
     command = stopExecute;
+    flag = true;
   } else if (interaction.commandName == "toggle_loop") {
     command = toggleLoopExecute;
+    flag = true;
   } else if (interaction.commandName == "toggle_queue_loop") {
     command = toggleQueueLoopExecute;
+    flag = true;
   }
   
 
