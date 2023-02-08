@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "discord.js";
 import "dotenv/config.js";
 
 import { openai } from "../OpenAI/openAIroutes.js";
-import { joinVoiceChannel } from "discord.js/voice";
+import { joinVoiceChannel } from "@discordjs/voice";
 
 
 async function completion(prompt) {
