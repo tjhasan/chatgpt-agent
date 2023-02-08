@@ -2,10 +2,14 @@ import { REST, Routes } from "discord.js";
 import "dotenv/config.js";
 
 import { data as chatGptData } from "./commands/chatgpt.js";
+import { data as pingData } from "./commands/ping.js";
 
 const commands = [];
 
+commands.push(pingData);
 commands.push(chatGptData);
+
+console.log(commands)
 
 // Construct and prepare an instance of the REST module
 const rest = new REST({ version: "10" }).setToken(
