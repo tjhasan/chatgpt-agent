@@ -30,5 +30,11 @@ export async function execute(interaction) {
   let response = await completion(prompt);
   // console.log(response);
 
-  return response.data.choices[0].text;
+  if(typeof response === 'string') {
+    return response.data.choices[0].text;
+  }
+  else {
+    return ("This idiot typed " + interaction.options.getString("input"))
+  }
+  
 }
