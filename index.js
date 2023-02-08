@@ -31,70 +31,33 @@ client.on(Events.InteractionCreate, async (interaction) => {
   // Find command names in the respective files in the 'commands' folder
   if(interaction.commandName == "ping") {
     command = pingExecute;
-
-    if (!command) {
-      console.error(
-        `This shouldn't happen. ${interaction.commandName} doesn't exist.`
-      );
-      return;
-    }
-    
-    try {
-      command(interaction);
-    } catch (error) {
-      console.error(error);
-      await interaction.reply({
-        content:
-          "There was an error when trying to execute this command. Let TJ know.",
-      });
-    }
   }
   else if(interaction.commandName == "chat") {
     command = chatGptExecute;
-
-    if (!command) {
-      console.error(
-        `This shouldn't happen. ${interaction.commandName} doesn't exist.`
-      );
-      return;
-    }
-
-    try {
-      await interaction.reply("Of course, one second while I think");
-      const result = await command(interaction);
-      await interaction.editReply(result);
-    } catch (error) {
-      console.error(error);
-      await interaction.reply({
-        content:
-          "There was an error when trying to execute this command. Let TJ know.",
-      });
-    }
   }
   else if(interaction.commandName == "voice") {
     command = chatGptVoiceExecute;
-
-    if (!command) {
-      console.error(
-        `This shouldn't happen. ${interaction.commandName} doesn't exist.`
-      );
-      return;
-    }
-    
-    try {
-      command(interaction);
-    } catch (error) {
-      console.error(error);
-      await interaction.reply({
-        content:
-          "There was an error when trying to execute this command. Let TJ know.",
-      });
-    }
   }
 
 
-  
+  if (!command) {
+    console.error(
+      `This shouldn't happen. ${interaction.commandName} doesn't exist.`
+    );
+    return;
+  }
 
+  try {
+    await interaction.reply("Of course, one second while I think");
+    const result = await command(interaction);
+    await interaction.editReply(result);
+  } catch (error) {
+    console.error(error);
+    await interaction.reply({
+      content:
+        "There was an error when trying to execute this command. Let TJ know.",
+    });
+  }
 });
 
 client.login(process.env.DISCORD_BOT_TOKEN);
