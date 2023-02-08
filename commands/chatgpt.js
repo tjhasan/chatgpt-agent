@@ -7,7 +7,7 @@ async function completion(prompt) {
   let response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: prompt,
-    max_tokens: 256,
+    max_tokens: 4000,
     echo: true,
   });
 
@@ -28,7 +28,7 @@ export async function execute(interaction) {
   let prompt = interaction.options.getString("input");
 
   let response = await completion(prompt);
-  console.log(response);
+  // console.log(response);
 
   return response.data.choices[0].text;
 }
