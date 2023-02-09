@@ -26,6 +26,7 @@
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
     "ffmpeg-static": "^5.1.0",
+    "firebase": "^9.17.1",
     "isomorphic-unfetch": "^4.0.2",
     "openai": "^3.1.0",
     "prettier": "^2.8.3",
