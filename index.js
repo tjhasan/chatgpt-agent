@@ -195,9 +195,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
       const row = new ActionRowBuilder().addComponents(
         back,
-        skip,
         resumepause,
-        loop
+        loop,
+        skip,
         
       )
 
