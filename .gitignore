@@ -13,6 +13,7 @@
 bot-token.txt
 .env
 
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -354,3 +355,6 @@ MigrationBackup/
 
 package-lock.json
 package-lock
+stable-diffusion-webui
+.gitignore
+stable-diffusion-webui
