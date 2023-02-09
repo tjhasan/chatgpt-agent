@@ -13,7 +13,7 @@ export const data = new SlashCommandBuilder()
 
 let options = {
   scriptPath: "./",
-  args: [],
+  args: [""],
 };
 
 function runpythoncode() {
@@ -28,8 +28,9 @@ function runpythoncode() {
 export async function execute(interaction) {
   try {
     let prompt = interaction.options.getString("prompt");
-    options.args.push(prompt);
+    options.args[0] = prompt;
     await runpythoncode();
+
     return { files: [{ attachment: "output.png" }] };
   } catch (error) {}
 }
