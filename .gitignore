@@ -360,7 +360,5 @@ MigrationBackup/
 package-lock.json
 package-lock
 stable-diffusion-webui
-.gitignore
-stable-diffusion-webui
 output.png
 output.png
