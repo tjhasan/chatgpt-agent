@@ -13,6 +13,7 @@
 bot-token.txt
 .env
 *.png
+output.png
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -359,3 +360,4 @@ package-lock
 stable-diffusion-webui
 .gitignore
 stable-diffusion-webui
+output.png

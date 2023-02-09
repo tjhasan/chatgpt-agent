@@ -19,7 +19,7 @@ let options = {
 function runpythoncode() {
   return new Promise((resolve) => {
     PythonShell.run("test.py", options, (err, result) => {
-      err ? console.log(err) : console.log(result);
+      if (err) throw err;
       resolve();
     });
   });
@@ -30,6 +30,6 @@ export async function execute(interaction) {
     let prompt = interaction.options.getString("prompt");
     options.args.push(prompt);
     await runpythoncode();
-    console.log("python script returned");
+    return { files: [{ attachment: "output.png" }] };
   } catch (error) {}
 }
