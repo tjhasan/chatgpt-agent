@@ -6,7 +6,7 @@ export const data = new SlashCommandBuilder()
   .setDescription("Seek")
   .addStringOption((option) =>
     option
-      .setName("seek")
+      .setName("seconds")
       .setDescription("How far to seek")
       .setRequired(true)
   );
@@ -16,5 +16,5 @@ export async function execute(interaction, client) {
 
     guildQueue.seek(parseInt(interaction.options.getString("seek")) * 1000);
 
-    return ("Mimir seeked " + parseInt(interaction.options.getString("seek")) * 1000 );
+    return ("Mimir jumped " + parseInt(interaction.options.getString("seek")) + " seconds forward" );
 }

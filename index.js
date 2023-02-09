@@ -166,7 +166,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
       );
 
       const result = await command(interaction, client);
-      await interaction.editReply({ content: result, components: [row] });
+      //await interaction.editReply({content: result, components: [row]});
+      await interaction.editReply(result);
     } else {
       try {
         await interaction.reply("Of course, one second while I think");
