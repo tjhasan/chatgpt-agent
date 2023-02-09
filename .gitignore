@@ -12,9 +12,11 @@
 *openai-key.*
 bot-token.txt
 .env
+*.jpg
+*.jpeg
 *.png
-output.png
-
+*.gif
+*.tiff
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -360,4 +362,5 @@ package-lock
 stable-diffusion-webui
 .gitignore
 stable-diffusion-webui
+output.png
 output.png
