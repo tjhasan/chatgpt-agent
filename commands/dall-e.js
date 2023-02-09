@@ -1,4 +1,4 @@
-import { Integration, SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder } from "discord.js";
 import { openai } from "../OpenAI/openAIroutes.js";
 
 async function completion(prompt) {
@@ -22,24 +22,22 @@ export const data = new SlashCommandBuilder()
   );
 
 export async function execute(interaction) {
+  try {
+    let prompt = interaction.options.getString("input");
 
-    try {
-        let prompt = interaction.options.getString("input");
+    let response = await completion(prompt);
+    console.log(response);
 
-        let response = await completion(prompt);
-        console.log(response);
-
-        if(response?.data) {
-            return response.data.data[0].url;
-        }
-        else {
-            interaction.editReply("this idiot typed " + interaction.options.getString("input"))
-        }
-
-       
+    if (response?.data) {
+      return response.data.data[0].url;
+    } else {
+      interaction.editReply(
+        "this idiot typed " + interaction.options.getString("input")
+      );
     }
-    catch(e) {
-        interaction.editReply("this idiot typed " + interaction.options.getString("input"))
-    }
-  
+  } catch (e) {
+    interaction.editReply(
+      "this idiot typed " + interaction.options.getString("input")
+    );
+  }
 }

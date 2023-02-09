@@ -12,6 +12,7 @@
 *openai-key.*
 bot-token.txt
 .env
+*.png
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)

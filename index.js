@@ -26,6 +26,7 @@ import { execute as skipExecute } from "./commands/music/skip.js";
 import { execute as stopExecute } from "./commands/music/stop.js";
 import { execute as toggleLoopExecute } from "./commands/music/toggleLoop.js";
 import { execute as toggleQueueLoopExecute } from "./commands/music/toggleQueueLoop.js";
+import { execute as waifuExecute } from "./commands/waifu.js";
 import { Player } from "discord-music-player";
 
 // intialize client
@@ -50,49 +51,6 @@ const player = new Player(client, {
 });
 
 client.player = player;
-
-//const row = new ActionRowBuilder();
-
-client.player.on("songFirst", (queue, song) => {
-  console.log("here");
-  const embed = new EmbedBuilder()
-    .setAuthor({
-      name: `Started playing ${song} in ${queue.connection.channel.name} 🎧`,
-    })
-    .setColor("#13f857");
-
-  const back = new ButtonBuilder()
-    .setLabel("Back")
-    .setCustomId(JSON.stringify({ ffb: "back" }))
-    .setStyle("Primary");
-
-  const skip = new ButtonBuilder()
-    .setLabel("Skip")
-    .setCustomId(JSON.stringify({ ffb: "skip" }))
-    .setStyle("Primary");
-
-  const resumepause = new ButtonBuilder()
-    .setLabel("Resume & Pause")
-    .setCustomId(JSON.stringify({ ffb: "resume&pause" }))
-    .setStyle("Danger");
-
-  const loop = new ButtonBuilder()
-    .setLabel("Loop")
-    .setCustomId(JSON.stringify({ ffb: "loop" }))
-    .setStyle("Secondary");
-
-  const queuebutton = new ButtonBuilder()
-    .setLabel("Queue")
-    .setCustomId(JSON.stringify({ ffb: "queue" }))
-    .setStyle("Secondary");
-
-  const row = new ActionRowBuilder().addComponents(
-    back,
-    skip,
-    resumepause,
-    loop
-  );
-});
 
 // client looks for commands -- interaction is command object
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -155,6 +113,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
   } else if (interaction.commandName == "toggle_queue_loop") {
     command = toggleQueueLoopExecute;
     flag = true;
+  } else if (interaction.commandName == "waifu_vision") {
+    command = waifuExecute;
   }
 
   if (!command) {

@@ -18,6 +18,7 @@ import { data as skipData } from "./commands/music/skip.js";
 import { data as stopData } from "./commands/music/stop.js";
 import { data as toggleLoopData } from "./commands/music/toggleLoop.js";
 import { data as toggleQueueLoopData } from "./commands/music/toggleQueueLoop.js";
+import { data as waifuData } from "./commands/waifu.js";
 
 const commands = [];
 
@@ -38,6 +39,7 @@ commands.push(stopData);
 commands.push(toggleLoopData);
 commands.push(toggleQueueLoopData);
 commands.push(chatgptvoiceData);
+commands.push(waifuData);
 
 // Construct and prepare an instance of the REST module
 const rest = new REST({ version: "10" }).setToken(

@@ -2,6 +2,7 @@ import requests
 from PIL import Image
 import io
 import base64
+import sys
 
 def getImage(prompt: str):
     payload = {
@@ -18,3 +19,5 @@ def getImage(prompt: str):
         image = Image.open(io.BytesIO(base64.b64decode(i.split(",",1)[0])))
         
     image.save('output.png')
+
+getImage(sys.argv[1])
