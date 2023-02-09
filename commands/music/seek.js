@@ -16,5 +16,5 @@ export async function execute(interaction, client) {
 
     guildQueue.seek(parseInt(interaction.options.getString("seek")) * 1000);
 
-    return ("Mimir jumped " + parseInt(interaction.options.getString("seek")) + " seconds forward" );
+    return ("Mimir jumped " + interaction.options.getString("seek") + " seconds forward" );
 }
