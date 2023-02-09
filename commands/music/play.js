@@ -21,5 +21,5 @@ export async function execute(interaction, client) {
             queue.stop();
     });
 
-    return "Here's your song";
+    return ("Now playing: " + queue.isPlaying());
 }
