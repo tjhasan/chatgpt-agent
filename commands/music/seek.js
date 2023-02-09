@@ -14,7 +14,7 @@ export const data = new SlashCommandBuilder()
 export async function execute(interaction, client) {
     let guildQueue = client.player.getQueue(interaction.guild.id);
 
-    guildQueue.seek(parseInt(interaction.options.getString("seek")) * 1000);
+    guildQueue.seek(parseInt(interaction.options.getString("seconds")) * 1000);
 
-    return ("Mimir jumped " + interaction.options.getString("seek") + " seconds forward" );
+    return ("Mimir jumped " + interaction.options.getString("seconds") + " seconds forward" );
 }
