@@ -1,6 +1,14 @@
 import "dotenv/config.js";
-import { Client, GatewayIntentBits, Collection, Events, ActionRowBuilder, ButtonBuilder, EmbedBuilder, ButtonStyle } from "discord.js";
-import { execute as pingExecute } from "./commands/ping.js";
+import {
+  Client,
+  GatewayIntentBits,
+  Collection,
+  Events,
+  ActionRowBuilder,
+  ButtonBuilder,
+  EmbedBuilder,
+  ButtonStyle,
+} from "discord.js";
 import { execute as chatGptExecute } from "./commands/chatgpt.js";
 import { execute as chatGptVoiceExecute } from "./commands/chatgptvoice.js";
 import { execute as dalleExecute } from "./commands/dall-e.js";
@@ -45,47 +53,46 @@ client.player = player;
 
 //const row = new ActionRowBuilder();
 
-client.player.on('songFirst', (queue, song) => {
-  console.log("here")
+client.player.on("songFirst", (queue, song) => {
+  console.log("here");
   const embed = new EmbedBuilder()
-  .setAuthor({name: `Started playing ${song} in ${queue.connection.channel.name} 🎧`})
-  .setColor('#13f857');
-
+    .setAuthor({
+      name: `Started playing ${song} in ${queue.connection.channel.name} 🎧`,
+    })
+    .setColor("#13f857");
 
   const back = new ButtonBuilder()
-    .setLabel('Back')
-    .setCustomId(JSON.stringify({ffb: 'back'}))
-    .setStyle('Primary')
+    .setLabel("Back")
+    .setCustomId(JSON.stringify({ ffb: "back" }))
+    .setStyle("Primary");
 
   const skip = new ButtonBuilder()
-    .setLabel('Skip')
-    .setCustomId(JSON.stringify({ffb: 'skip'}))
-    .setStyle('Primary')
+    .setLabel("Skip")
+    .setCustomId(JSON.stringify({ ffb: "skip" }))
+    .setStyle("Primary");
 
   const resumepause = new ButtonBuilder()
-    .setLabel('Resume & Pause')
-    .setCustomId(JSON.stringify({ffb: 'resume&pause'}))
-    .setStyle('Danger')
+    .setLabel("Resume & Pause")
+    .setCustomId(JSON.stringify({ ffb: "resume&pause" }))
+    .setStyle("Danger");
 
   const loop = new ButtonBuilder()
-    .setLabel('Loop')
-    .setCustomId(JSON.stringify({ffb: 'loop'}))
-    .setStyle('Secondary')
+    .setLabel("Loop")
+    .setCustomId(JSON.stringify({ ffb: "loop" }))
+    .setStyle("Secondary");
 
   const queuebutton = new ButtonBuilder()
-    .setLabel('Queue')
-    .setCustomId(JSON.stringify({ffb: 'queue'}))
-    .setStyle('Secondary')
+    .setLabel("Queue")
+    .setCustomId(JSON.stringify({ ffb: "queue" }))
+    .setStyle("Secondary");
 
-    const row = new ActionRowBuilder().addComponents(
-      back,
-      skip,
-      resumepause,
-      loop
-      
-    )
-
-})
+  const row = new ActionRowBuilder().addComponents(
+    back,
+    skip,
+    resumepause,
+    loop
+  );
+});
 
 // client looks for commands -- interaction is command object
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -99,9 +106,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
   // Check which command we are using and assign the import to the the command variable
   // Find command names in the respective files in the 'commands' folder
-  if (interaction.commandName == "ping") {
-    command = pingExecute;
-  } else if (interaction.commandName == "chat") {
+  if (interaction.commandName == "chat") {
     command = chatGptExecute;
   } else if (interaction.commandName == "voice") {
     command = chatGptVoiceExecute;
@@ -151,7 +156,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
     command = toggleQueueLoopExecute;
     flag = true;
   }
-  
 
   if (!command) {
     console.error(
@@ -161,60 +165,59 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 
   try {
-    if(flag) {
+    if (flag) {
       await interaction.reply("Of course, one second while I think");
       const embed = new EmbedBuilder()
-      .setAuthor({name: `Started playing ${interaction.options.getString("song")}  🎧`})
-      .setColor('#13f857');
-
+        .setAuthor({
+          name: `Started playing ${interaction.options.getString("song")}  🎧`,
+        })
+        .setColor("#13f857");
 
       const back = new ButtonBuilder()
-        .setLabel('Back')
-        .setCustomId(JSON.stringify({ffb: 'back'}))
-        .setStyle('Primary')
+        .setLabel("Back")
+        .setCustomId(JSON.stringify({ ffb: "back" }))
+        .setStyle("Primary");
 
       const skip = new ButtonBuilder()
-        .setLabel('Skip')
-        .setCustomId(JSON.stringify({ffb: 'skip'}))
-        .setStyle('Primary')
+        .setLabel("Skip")
+        .setCustomId(JSON.stringify({ ffb: "skip" }))
+        .setStyle("Primary");
 
       const resumepause = new ButtonBuilder()
-        .setLabel('Resume & Pause')
-        .setCustomId(JSON.stringify({ffb: 'resume&pause'}))
-        .setStyle('Danger')
+        .setLabel("Resume & Pause")
+        .setCustomId(JSON.stringify({ ffb: "resume&pause" }))
+        .setStyle("Danger");
 
       const loop = new ButtonBuilder()
-        .setLabel('Loop')
-        .setCustomId(JSON.stringify({ffb: 'loop'}))
-        .setStyle('Secondary')
+        .setLabel("Loop")
+        .setCustomId(JSON.stringify({ ffb: "loop" }))
+        .setStyle("Secondary");
 
       const queuebutton = new ButtonBuilder()
-        .setLabel('Queue')
-        .setCustomId(JSON.stringify({ffb: 'queue'}))
-        .setStyle('Secondary')
+        .setLabel("Queue")
+        .setCustomId(JSON.stringify({ ffb: "queue" }))
+        .setStyle("Secondary");
 
       const row = new ActionRowBuilder().addComponents(
         back,
         resumepause,
         loop,
-        skip,
-        
-      )
+        skip
+      );
 
       const result = await command(interaction, client);
-      await interaction.editReply({content: result, components: [row]});
-    }
-    else {
+      await interaction.editReply({ content: result, components: [row] });
+    } else {
       try {
         await interaction.reply("Of course, one second while I think");
         const result = await command(interaction);
         await interaction.editReply(result);
-      }
-      catch(e) {
-        interaction.editReply("this idiot typed " + interaction.options.getString("input"))
+      } catch (e) {
+        interaction.editReply(
+          "this idiot typed " + interaction.options.getString("input")
+        );
       }
     }
-    
   } catch (error) {
     console.error(error);
     await interaction.editReply({

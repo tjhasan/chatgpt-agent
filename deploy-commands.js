@@ -2,7 +2,6 @@ import { REST, Routes } from "discord.js";
 import "dotenv/config.js";
 
 import { data as chatGptData } from "./commands/chatgpt.js";
-import { data as pingData } from "./commands/ping.js";
 import { data as dalleData } from "./commands/dall-e.js";
 import { data as chatgptvoiceData } from "./commands/chatgptvoice.js";
 import { data as clearQueueData } from "./commands/music/clearQueue.js";
@@ -22,7 +21,6 @@ import { data as toggleQueueLoopData } from "./commands/music/toggleQueueLoop.js
 
 const commands = [];
 
-commands.push(pingData);
 commands.push(chatGptData);
 commands.push(dalleData);
 commands.push(clearQueueData);
@@ -40,7 +38,6 @@ commands.push(stopData);
 commands.push(toggleLoopData);
 commands.push(toggleQueueLoopData);
 commands.push(chatgptvoiceData);
-
 
 // Construct and prepare an instance of the REST module
 const rest = new REST({ version: "10" }).setToken(
