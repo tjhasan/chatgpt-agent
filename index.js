@@ -1,5 +1,5 @@
 import "dotenv/config.js";
-import { Client, GatewayIntentBits, Collection, Events } from "discord.js";
+import { Client, GatewayIntentBits, Collection, Events, ActionRowBuilder, ButtonBuilder, EmbedBuilder, ButtonStyle } from "discord.js";
 import { execute as pingExecute } from "./commands/ping.js";
 import { execute as chatGptExecute } from "./commands/chatgpt.js";
 import { execute as chatGptVoiceExecute } from "./commands/chatgptvoice.js";
@@ -42,6 +42,50 @@ const player = new Player(client, {
 });
 
 client.player = player;
+
+//const row = new ActionRowBuilder();
+
+client.player.on('songFirst', (queue, song) => {
+  console.log("here")
+  const embed = new EmbedBuilder()
+  .setAuthor({name: `Started playing ${song} in ${queue.connection.channel.name} 🎧`})
+  .setColor('#13f857');
+
+
+  const back = new ButtonBuilder()
+    .setLabel('Back')
+    .setCustomId(JSON.stringify({ffb: 'back'}))
+    .setStyle('Primary')
+
+  const skip = new ButtonBuilder()
+    .setLabel('Skip')
+    .setCustomId(JSON.stringify({ffb: 'skip'}))
+    .setStyle('Primary')
+
+  const resumepause = new ButtonBuilder()
+    .setLabel('Resume & Pause')
+    .setCustomId(JSON.stringify({ffb: 'resume&pause'}))
+    .setStyle('Danger')
+
+  const loop = new ButtonBuilder()
+    .setLabel('Loop')
+    .setCustomId(JSON.stringify({ffb: 'loop'}))
+    .setStyle('Secondary')
+
+  const queuebutton = new ButtonBuilder()
+    .setLabel('Queue')
+    .setCustomId(JSON.stringify({ffb: 'queue'}))
+    .setStyle('Secondary')
+
+    const row = new ActionRowBuilder().addComponents(
+      back,
+      skip,
+      resumepause,
+      loop
+      
+    )
+
+})
 
 // client looks for commands -- interaction is command object
 client.on(Events.InteractionCreate, async (interaction) => {
@@ -119,8 +163,46 @@ client.on(Events.InteractionCreate, async (interaction) => {
   try {
     if(flag) {
       await interaction.reply("Of course, one second while I think");
+      const embed = new EmbedBuilder()
+      .setAuthor({name: `Started playing ${interaction.options.getString("song")}  🎧`})
+      .setColor('#13f857');
+
+
+      const back = new ButtonBuilder()
+        .setLabel('Back')
+        .setCustomId(JSON.stringify({ffb: 'back'}))
+        .setStyle('Primary')
+
+      const skip = new ButtonBuilder()
+        .setLabel('Skip')
+        .setCustomId(JSON.stringify({ffb: 'skip'}))
+        .setStyle('Primary')
+
+      const resumepause = new ButtonBuilder()
+        .setLabel('Resume & Pause')
+        .setCustomId(JSON.stringify({ffb: 'resume&pause'}))
+        .setStyle('Danger')
+
+      const loop = new ButtonBuilder()
+        .setLabel('Loop')
+        .setCustomId(JSON.stringify({ffb: 'loop'}))
+        .setStyle('Secondary')
+
+      const queuebutton = new ButtonBuilder()
+        .setLabel('Queue')
+        .setCustomId(JSON.stringify({ffb: 'queue'}))
+        .setStyle('Secondary')
+
+      const row = new ActionRowBuilder().addComponents(
+        back,
+        skip,
+        resumepause,
+        loop
+        
+      )
+
       const result = await command(interaction, client);
-      await interaction.editReply(result);
+      await interaction.editReply({content: "Here you go", components: [row]});
     }
     else {
       try {
@@ -137,7 +219,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
     console.error(error);
     await interaction.editReply({
       content:
-        "There was an error when trying to execute this command. Let TJ know.",
+        "There was an error when trying to execute this command. Let Matthew or TJ know.",
     });
   }
 });
