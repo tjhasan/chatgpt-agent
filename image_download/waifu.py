@@ -18,6 +18,6 @@ def getImage(prompt: str):
     for i in response['images']:
         image = Image.open(io.BytesIO(base64.b64decode(i.split(",",1)[0])))
         
-    image.save('output.png')
+    image.save('waifu.png')
 
 getImage(sys.argv[1])

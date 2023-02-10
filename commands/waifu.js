@@ -12,13 +12,13 @@ export const data = new SlashCommandBuilder()
   );
 
 let options = {
-  scriptPath: "./",
+  scriptPath: "../image-download",
   args: [""],
 };
 
 function runpythoncode() {
   return new Promise((resolve) => {
-    PythonShell.run("test.py", options, (err, result) => {
+    PythonShell.run("waifu.py", options, (err, result) => {
       if (err) throw err;
       resolve();
     });
@@ -31,6 +31,6 @@ export async function execute(interaction) {
     options.args[0] = prompt;
     await runpythoncode();
 
-    return { files: [{ attachment: "output.png" }] };
+    return { files: [{ attachment: "../waifu.png" }] };
   } catch (error) {}
 }

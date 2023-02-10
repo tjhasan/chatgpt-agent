@@ -174,6 +174,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
         const result = await command(interaction);
         await interaction.editReply(result);
       } catch (e) {
+        console.log(e);
         interaction.editReply(
           "this idiot typed " + interaction.options.getString("input")
         );
