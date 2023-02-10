@@ -11,20 +11,48 @@ export const data = new SlashCommandBuilder()
   .setDescription("Ask Mimir to show you the anime girl of your dreams.")
   .addStringOption((option) =>
     option
-      .setName("prompt")
+      .setName("model")
       .setDescription(
-        "MUST be a comma separated list of descriptors. Use \\waitfu-help for more info."
+        "Which model would you like to choose? Use \\waifu-help for more info."
       )
       .setRequired(true)
+      .addChoices(
+        { name: "AOM2", value: "AOM2.safetensors" },
+        { name: "BOM", value: "BOM.safetensors" },
+        { name: "EOM2", value: "EOM2.safetensors" },
+        { name: "WDModel", value: "WDmodel.ckpt" }
+      )
+  )
+  .addStringOption((option) =>
+    option
+      .setName("prompt")
+      .setDescription(
+        "MUST be a comma separated list of descriptors you WANT to see. Use \\waifu-help for more info."
+      )
+      .setRequired(true)
+  )
+  .addStringOption((option) =>
+    option
+      .setName("negative_prompt")
+      .setDescription(
+        "MUST be a comma separated list of descriptors you DO NOT want to see. Use \\waifu-help for more info."
+      )
+      .setRequired(true)
+  )
+  .addIntegerOption((option) =>
+    option
+      .setName("seed")
+      .setDescription(
+        "What seed do you want to generate on? Can be a positive whole number. Leave blank if you don't know."
+      )
   );
-
 /*
 Need to add the following options to args:
   user input:
-    - model: Which model to use (can do)
-    - prompt: What the user wants to see (can do)
-    - negative prompt: What the user doesn't want to see (can do)
-    - seed: Random if not given. Print out seed when used.
+    done - model: Which model to use
+    done - prompt: What the user wants to see (can do)
+    done - negative prompt: What the user doesn't want to see (can do)
+    done - seed: Random if not given. Print out seed when used.
 
   Depends on user chosen model:
     - sampler: Which sampler to use (can do)
