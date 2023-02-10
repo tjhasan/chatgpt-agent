@@ -1,8 +1,5 @@
 import requests
-from PIL import Image
 import urllib.request
-import io
-import base64
 import sys
 
 def getImage(prompt, apiKey: str):
@@ -24,6 +21,7 @@ def getImage(prompt, apiKey: str):
         imageURL = response["data"][0]["url"]
     except KeyError:
         print("Error")
+        return
     urllib.request.urlretrieve(imageURL, "../vision.png")
     print("Success")
 
