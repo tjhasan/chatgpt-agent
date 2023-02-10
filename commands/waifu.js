@@ -12,7 +12,7 @@ export const data = new SlashCommandBuilder()
   );
 
 let options = {
-  scriptPath: "../image-download",
+  scriptPath: "./image_download",
   args: [""],
 };
 
@@ -38,7 +38,7 @@ export async function execute(interaction) {
   await runpythoncode();
 
   if (pyResult === "Success") {
-    return { files: [{ attachment: "../waifu.png" }] };
+    return { files: [{ attachment: "./waifu.png" }] };
   } else {
     return "Can't connect to server. Ask TJ to turn it on or go do something else.";
   }
