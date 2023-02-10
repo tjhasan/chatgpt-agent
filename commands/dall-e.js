@@ -32,36 +32,27 @@ let options = {
   args: ["", ""],
 };
 
+let pyResult = "";
+
 function runpythoncode() {
+  pyResult = "";
   return new Promise((resolve) => {
     PythonShell.run("vision.py", options, (err, result) => {
-      if (err) throw err;
+      pyResult = result[0];
       resolve();
     });
   });
 }
 
 export async function execute(interaction) {
-  try {
-    let prompt = interaction.options.getString("input");
-    options.args[0] = prompt;
-    options.args[1] = process.env.OPENAI_TOKEN;
-    await runpythoncode(prompt);
-
+  let prompt = interaction.options.getString("input");
+  options.args[0] = prompt;
+  options.args[1] = process.env.OPENAI_TOKEN;
+  await runpythoncode(prompt);
+  console.log(pyResult);
+  if (pyResult === "Success") {
     return { files: [{ attachment: "../vision.png" }] };
-
-    // if (response?.data) {
-    //   return response.data.data[0].url;
-    // } else {
-    //   console.log("Shouldn't be here");
-    //   interaction.editReply(
-    //     "this idiot typed " + interaction.options.getString("input")
-    //   );
-    // }
-  } catch (e) {
-    console.log(e);
-    interaction.editReply(
-      "this idiot typed " + interaction.options.getString("input")
-    );
+  } else {
+    return "This idiot typed " + interaction.options.getString("input");
   }
 }

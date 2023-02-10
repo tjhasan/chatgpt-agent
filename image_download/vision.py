@@ -18,14 +18,14 @@ def getImage(prompt, apiKey: str):
         "size": "1024x1024"
 
     }
+    response = requests.post(url=f'https://api.openai.com/v1/images/generations', headers=headers, json=payload)
+    response = response.json()
     try:
-        response = requests.post(url=f'https://api.openai.com/v1/images/generations', headers=headers, json=payload)
-        response = response.json()
-
         imageURL = response["data"][0]["url"]
-    except:
-        return Exception
-    urllib.request.urlretrieve(imageURL, "../vision.jpg")
+    except KeyError:
+        print("Error")
+    urllib.request.urlretrieve(imageURL, "../vision.png")
+    print("Success")
 
 
 getImage(sys.argv[1], sys.argv[2])
