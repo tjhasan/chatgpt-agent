@@ -38,6 +38,7 @@ function runpythoncode() {
   pyResult = "";
   return new Promise((resolve) => {
     PythonShell.run("vision.py", options, (err, result) => {
+      console.log(result);
       pyResult = result[0];
       resolve();
     });
@@ -49,7 +50,7 @@ export async function execute(interaction) {
   options.args[0] = prompt;
   options.args[1] = process.env.OPENAI_TOKEN;
   await runpythoncode(prompt);
-  console.log(pyResult);
+
   if (pyResult === "Success") {
     return { files: [{ attachment: "../vision.png" }] };
   } else {

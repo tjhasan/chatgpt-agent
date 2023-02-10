@@ -16,21 +16,27 @@ let options = {
   args: [""],
 };
 
+let pyResult = "";
+
 function runpythoncode() {
+  pyResult = "";
   return new Promise((resolve) => {
     PythonShell.run("waifu.py", options, (err, result) => {
-      if (err) throw err;
+      console.log(result);
+      pyResult = result[0];
       resolve();
     });
   });
 }
 
 export async function execute(interaction) {
-  try {
-    let prompt = interaction.options.getString("prompt");
-    options.args[0] = prompt;
-    await runpythoncode();
+  let prompt = interaction.options.getString("prompt");
+  options.args[0] = prompt;
+  await runpythoncode();
 
+  if (pyResult === "Success") {
     return { files: [{ attachment: "../waifu.png" }] };
-  } catch (error) {}
+  } else {
+    return "Can't connect to server. Ask TJ to turn it on or go do something else.";
+  }
 }
