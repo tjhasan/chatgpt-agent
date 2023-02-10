@@ -22,8 +22,11 @@ function runpythoncode() {
   pyResult = "";
   return new Promise((resolve) => {
     PythonShell.run("waifu.py", options, (err, result) => {
-      console.log(result);
-      pyResult = result[0];
+      if (err) {
+        pyResult = "Error";
+      } else {
+        pyResult = "Success";
+      }
       resolve();
     });
   });

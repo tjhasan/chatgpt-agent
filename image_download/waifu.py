@@ -13,8 +13,8 @@ def getImage(prompt: str):
     }
     try:
         response = requests.post(url=f'http://127.0.0.1:7860/sdapi/v1/txt2img', json=payload)
-    except:
-        print("Can't connect to server")
+    except Exception:
+        print("Error")
         return
     response = response.json()
 
