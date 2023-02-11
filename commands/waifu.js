@@ -15,8 +15,7 @@ export const data = new SlashCommandBuilder()
         { name: "AnythingV3", value: "anything-v3.safetensors" },
         { name: "AOM2", value: "AOM2.safetensors" },
         { name: "BOM", value: "BOM.safetensors" },
-        { name: "EOM2", value: "EOM2.safetensors" },
-        { name: "WDModel", value: "WDmodel.ckpt" }
+        { name: "EOM2", value: "EOM2.safetensors" }
       )
   )
   .addStringOption((option) =>
