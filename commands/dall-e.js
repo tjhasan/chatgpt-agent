@@ -1,11 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import { openai } from "../OpenAI/openAIroutes.js";
 import { PythonShell } from "python-shell";
-import { addImageToStorage } from "../lib/firebase/firebaseClient.js";
-import * as https from "https";
-import { createWriteStream } from "fs";
-import * as url from "url";
-import * as fs from "fs";
 
 async function completion(prompt) {
   let response = await openai.createImage({
