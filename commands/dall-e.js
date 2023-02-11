@@ -38,7 +38,6 @@ function runpythoncode() {
   pyResult = "";
   return new Promise((resolve) => {
     PythonShell.run("vision.py", options, (err, result) => {
-      console.log(result);
       pyResult = result[0];
       resolve();
     });

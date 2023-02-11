@@ -12,10 +12,26 @@ export const data = new SlashCommandBuilder()
       )
       .setRequired(true)
       .addChoices(
-        { name: "AnythingV3", value: "anything-v3.safetensors" },
-        { name: "AOM2", value: "AOM2.safetensors" },
-        { name: "BOM", value: "BOM.safetensors" },
-        { name: "EOM2", value: "EOM2.safetensors" }
+        {
+          name: "AnythingV3",
+          value: "anything-v3.safetensors",
+        },
+        {
+          name: "SFW_AbyssOrangeMix2",
+          value: "AbyssOrangeMix2_sfw.safetensors",
+        },
+        {
+          name: "NSFW_AbyssOrangeMix2",
+          value: "AbyssOrangeMix2_nsfw.safetensors",
+        },
+        {
+          name: "SFW_EerieOrangeMix2",
+          value: "EerieOrangeMix2_base.ckpt",
+        },
+        {
+          name: "NSFW_EerieOrangeMix2",
+          value: "EerieOrangeMix2_night.safetensors",
+        }
       )
   )
   .addStringOption((option) =>
@@ -38,7 +54,7 @@ export const data = new SlashCommandBuilder()
     option
       .setName("seed")
       .setDescription(
-        "What seed do you want to generate on? Can be a positive whole number. Leave blank if you don't know."
+        "What seed do you want to generate on? Can be a positive whole number."
       )
       .setRequired(true)
   );
@@ -79,16 +95,18 @@ export async function execute(interaction) {
   let seed = interaction.options.getString("seed");
 
   let sampler = "DPM++ SDE Karras";
-  if (model === "WDmodel.ckpt") {
-    sampler = "Euler A";
-  } else if (model === "anything-v3.safetensors") {
+
+  if (model === "anything-v3.safetensors") {
     sampler = "DPM++ 2M Karras";
   }
 
   let steps = 20;
   let denoise_strength = 0.5;
 
-  if (model === "EOM2.safetensors") {
+  if (
+    model === "EerieOrangeMix2_base.ckpt" ||
+    "EerieOrangeMix2_night.safetensors"
+  ) {
     steps = 24;
     denoise_strength = 0.45;
   }
