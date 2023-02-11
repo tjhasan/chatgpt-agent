@@ -1,11 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import { PythonShell } from "python-shell";
 
-/*
-Need to add the following options:
-  model: which model should they run the prompt on (should be a list to choose from)
-  
-*/
 export const data = new SlashCommandBuilder()
   .setName("waifu_vision")
   .setDescription("Ask Mimir to show you the anime girl of your dreams.")
@@ -17,6 +12,7 @@ export const data = new SlashCommandBuilder()
       )
       .setRequired(true)
       .addChoices(
+        { name: "AnythingV3", value: "anything-v3.safetensors" },
         { name: "AOM2", value: "AOM2.safetensors" },
         { name: "BOM", value: "BOM.safetensors" },
         { name: "EOM2", value: "EOM2.safetensors" },
@@ -39,29 +35,26 @@ export const data = new SlashCommandBuilder()
       )
       .setRequired(true)
   )
-  .addIntegerOption((option) =>
+  .addStringOption((option) =>
     option
       .setName("seed")
       .setDescription(
         "What seed do you want to generate on? Can be a positive whole number. Leave blank if you don't know."
       )
+      .setRequired(true)
   );
-/*
-Need to add the following options to args:
-  user input:
-    done - model: Which model to use
-    done - prompt: What the user wants to see (can do)
-    done - negative prompt: What the user doesn't want to see (can do)
-    done - seed: Random if not given. Print out seed when used.
 
-  Depends on user chosen model:
-    - sampler: Which sampler to use (can do)
-    - steps: How many steps the diffuser should take: (can do)
-    - Denoise Strength: (can do)
-*/
 let options = {
   scriptPath: "./image_download",
-  args: [""],
+  args: [
+    "model",
+    "prompt",
+    "negative_prompt",
+    "seed",
+    "sampler",
+    "steps",
+    "denoise_strength",
+  ],
 };
 
 let pyResult = "";
@@ -81,10 +74,36 @@ function runpythoncode() {
 }
 
 export async function execute(interaction) {
+  let model = interaction.options.getString("model");
   let prompt = interaction.options.getString("prompt");
-  options.args[0] = prompt;
-  await runpythoncode();
+  let negative_prompt = interaction.options.getString("negative_prompt");
+  let seed = interaction.options.getString("seed");
 
+  let sampler = "DPM++ SDE Karras";
+  if (model === "WDmodel.ckpt") {
+    sampler = "Euler A";
+  } else if (model === "anything-v3.safetensors") {
+    sampler = "DPM++ 2M Karras";
+  }
+
+  let steps = 20;
+  let denoise_strength = 0.5;
+
+  if (model === "EOM2.safetensors") {
+    steps = 24;
+    denoise_strength = 0.45;
+  }
+
+  options.args[0] = model;
+  options.args[1] = prompt;
+  options.args[2] = negative_prompt;
+  options.args[3] = seed;
+  options.args[4] = sampler;
+  options.args[5] = steps;
+  options.args[6] = denoise_strength;
+
+  await runpythoncode();
+  console.log(pyResult);
   if (pyResult === "Success") {
     return { files: [{ attachment: "./waifu.png" }] };
   } else {
