@@ -103,7 +103,7 @@ export async function execute(interaction) {
   options.args[6] = denoise_strength;
 
   await runpythoncode();
-  console.log(pyResult);
+
   if (pyResult === "Success") {
     return { files: [{ attachment: "./waifu.png" }] };
   } else {
