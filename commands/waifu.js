@@ -58,9 +58,8 @@ export const data = new SlashCommandBuilder()
     option
       .setName("seed")
       .setDescription(
-        "What seed do you want to generate on? Can be a positive whole number."
+        "What seed do you want to generate on? Can be a positive whole number. If you don't care leave this blank"
       )
-      .setRequired(true)
   );
 
 let options = {
@@ -102,6 +101,12 @@ export async function execute(interaction) {
   let denoise_strength = 0.5;
   let vae = "None";
   let cfg_scale = 7;
+
+  if (seed == null) {
+    seed = -1;
+  }
+
+  console.log(seed);
 
   switch (model) {
     case "robodiffusion.safetensors":
