@@ -27,6 +27,7 @@ import { execute as stopExecute } from "./commands/music/stop.js";
 import { execute as toggleLoopExecute } from "./commands/music/toggleLoop.js";
 import { execute as toggleQueueLoopExecute } from "./commands/music/toggleQueueLoop.js";
 import { execute as waifuExecute } from "./commands/waifu.js";
+import { execute as spotifyExecute } from "./commands/music/spotify.js";
 import { Player } from "discord-music-player";
 
 // intialize client
@@ -115,6 +116,9 @@ client.on(Events.InteractionCreate, async (interaction) => {
     flag = true;
   } else if (interaction.commandName == "waifu_vision") {
     command = waifuExecute;
+  } else if (interaction.commandName == "spotify") {
+    command = spotifyExecute;
+    flag = true;
   }
 
   if (!command) {

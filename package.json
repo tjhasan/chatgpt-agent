@@ -21,13 +21,17 @@
   "dependencies": {
     "@discordjs/opus": "^0.8.0",
     "@discordjs/voice": "^0.14.0",
+    "@distube/spotify": "^1.5.1",
     "discord-music-player": "^9.1.1",
     "discord-ytdl-core": "^5.0.4",
     "discord.js": "^14.7.1",
+    "distube": "^4.0.4",
     "dotenv": "^16.0.3",
     "ffmpeg-static": "^5.1.0",
     "firebase": "^9.17.1",
+    "install": "^0.13.0",
     "isomorphic-unfetch": "^4.0.2",
+    "npm": "^9.4.2",
     "openai": "^3.1.0",
     "prettier": "^2.8.3",
     "python-shell": "^3.0.1",
@@ -36,5 +40,8 @@
     "youtubei": "^1.1.2",
     "ytdl-core": "^4.11.2",
     "ytsr": "^3.8.0"
+  },
+  "devDependencies": {
+    "spotify-to-yt": "^1.1.1"
   }
 }

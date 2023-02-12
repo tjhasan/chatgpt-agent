@@ -58,7 +58,7 @@ export const data = new SlashCommandBuilder()
     option
       .setName("seed")
       .setDescription(
-        "What seed do you want to generate on? Can be a positive whole number. If you don't care leave this blank"
+        "What seed do you want to generate on? Can be a positive whole number. You can leave blank"
       )
   );
 
