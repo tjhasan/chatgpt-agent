@@ -16,7 +16,7 @@ export const data = new SlashCommandBuilder()
 
 export async function execute(interaction, client) {
 
-    let ytUrl = spotifyToYT.playListGet(interactions.options.getString("playlist"));
+    //let ytUrl = spotifyToYT.playListGet(interactions.options.getString("playlist"));
 
     const distube = new DisTube(client, {
         plugins: [new SpotifyPlugin()],
