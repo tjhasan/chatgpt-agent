@@ -4,13 +4,16 @@ import io
 import base64
 import sys
 
-def getImage(model: str, prompt: str, negative_prompt: str, seed: int, sampler: str, steps: int, denoise_strength: float):
+def getImage(model: str, prompt: str, negative_prompt: str, seed: int, sampler: str, steps: int, denoise_strength: float, vae: str, cfg_scale: int):
     url = 'http://127.0.0.1:7860'
 
-    option_payload = {"sd_model_checkpoint": model}
+    option_payload = {
+        "sd_model_checkpoint": model,
+        "sd_vae": vae
+    }
     
     try:
-        requests.post(url=f'{url}/sdapi/v1/txt2img', json=option_payload)
+        requests.post(url=f'{url}/sdapi/v1/options', json=option_payload)
     except:
         print("Error")
         return
@@ -21,7 +24,8 @@ def getImage(model: str, prompt: str, negative_prompt: str, seed: int, sampler: 
         "seed": seed,
         "sampler_name": sampler,
         "steps": steps,
-        "denoising_strength": denoise_strength
+        "denoising_strength": denoise_strength,
+        "cfg_scale": cfg_scale,
     }
     
     try:
@@ -46,5 +50,7 @@ seed = int(sys.argv[4])
 sampler = sys.argv[5]
 steps = int(sys.argv[6])
 denoise_strength = float(sys.argv[7])
+vae = sys.argv[8]
+cfg_scale = sys.argv[9]
 
-getImage(model, prompt, negative_prompt, seed, sampler, steps, denoise_strength)
+getImage(model, prompt, negative_prompt, seed, sampler, steps, denoise_strength, vae, cfg_scale)

@@ -13,24 +13,28 @@ export const data = new SlashCommandBuilder()
       .setRequired(true)
       .addChoices(
         {
-          name: "AnythingV3",
-          value: "anything-v3.safetensors",
+          name: "Robo Diffusion -> Robot / Mech centered art",
+          value: "robodiffusion.safetensors",
         },
         {
-          name: "SFW_AbyssOrangeMix2",
-          value: "AbyssOrangeMix2_sfw.safetensors",
+          name: "(NSFW) Corneo's 7th Heaven Mix -> Great for general use. Really good for NSFW.",
+          value: "corneos7thheavenmix.safetensors",
         },
         {
-          name: "NSFW_AbyssOrangeMix2",
-          value: "AbyssOrangeMix2_nsfw.safetensors",
+          name: "Counterfeit-V2.5 -> Great for highly detailed SFW ~ soft NSFW anime pictures.",
+          value: "counterfeitV25.safetensors",
         },
         {
-          name: "SFW_EerieOrangeMix2",
-          value: "EerieOrangeMix2_base.ckpt",
+          name: "Pastel Mix -> Unique, pastel style pictures.",
+          value: "pastelwaifu.safetensors",
         },
         {
-          name: "NSFW_EerieOrangeMix2",
-          value: "EerieOrangeMix2_night.safetensors",
+          name: "Cetus-Mix -> Good for anime art with more detailed backgrounds.",
+          value: "cetusmix.safetensors",
+        },
+        {
+          name: "Ligne Clair -> Great for 'Ghibli' style art. Strong lines, flat colors, low gradient.",
+          value: "ligneclaire.safetensors",
         }
       )
   )
@@ -93,22 +97,36 @@ export async function execute(interaction) {
   let prompt = interaction.options.getString("prompt");
   let negative_prompt = interaction.options.getString("negative_prompt");
   let seed = interaction.options.getString("seed");
-
-  let sampler = "DPM++ SDE Karras";
-
-  if (model === "anything-v3.safetensors") {
-    sampler = "DPM++ 2M Karras";
-  }
-
+  let sampler = "DPM++ 2M Karras";
   let steps = 20;
   let denoise_strength = 0.5;
+  let vae = "None";
+  let cfg_scale = 7;
 
-  if (
-    model === "EerieOrangeMix2_base.ckpt" ||
-    "EerieOrangeMix2_night.safetensors"
-  ) {
-    steps = 24;
-    denoise_strength = 0.45;
+  switch (model) {
+    case "robodiffusion.safetensors":
+      prompt += ", nousr robot, mdjrny-v4 style";
+      sampler = "DPM++ SDE Karras";
+      steps = 23;
+      break;
+    case "corneos7thheavenmix.safetensors":
+      steps = 30;
+      cfg_scale = 10;
+      break;
+    case "counterfeitV25.safetensors":
+      cfg_scale = 10;
+      break;
+    case "pastelwaifu.safetensors":
+      vae = "pastelwaifu.vae.pt";
+      break;
+    case "cetusmix.safetensors":
+      vae = "pastelwaifu.vae.pt";
+      break;
+    case "ligneclaire.safetensors":
+      prompt +=
+        ", ligne claire, flat color, limited palette, low contrast, high contrast, chromatic aberration";
+      steps = 13;
+      break;
   }
 
   options.args[0] = model;
@@ -118,6 +136,8 @@ export async function execute(interaction) {
   options.args[4] = sampler;
   options.args[5] = steps;
   options.args[6] = denoise_strength;
+  options.args[7] = vae;
+  options.args[8] = cfg_scale;
 
   await runpythoncode();
 
