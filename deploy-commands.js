@@ -19,7 +19,7 @@ import { data as stopData } from "./commands/music/stop.js";
 import { data as toggleLoopData } from "./commands/music/toggleLoop.js";
 import { data as toggleQueueLoopData } from "./commands/music/toggleQueueLoop.js";
 import { data as waifuData } from "./commands/waifu.js";
-import { data as spotifyData} from "./commands/music/spotify.js"
+import { data as spotifyData} from "./commands/music/spotify.cjs"
 
 const commands = [];
 
