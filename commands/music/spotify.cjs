@@ -50,12 +50,19 @@ async function execute(interaction, client) {
     console.log(ytUrl.songs[0])
 
     for(let i = 0; i < ytUrl.songs.length; i++) {
-      
-      let song = await queue.play(String(ytUrl.songs[i])).catch(err => {
+      try {
+        let song = await queue.play(String(ytUrl.songs[i])).catch(err => {
           console.log(err);
           if(!guildQueue)
               queue.stop();
-      });
+        });
+      }
+      catch(e) {
+        console.log("didn't find a song continuing")
+        continue;
+      }
+      
+      
     }
 
 
