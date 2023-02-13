@@ -13,16 +13,12 @@ export const data = new SlashCommandBuilder()
       .setRequired(true)
       .addChoices(
         {
+          name: "Dreamshaper -> Great general use model. Good for landscapes, portraits, anime, etc.",
+          value: "dreamshaper.safetensors",
+        },
+        {
           name: "Robo Diffusion -> Robot / Mech centered art",
           value: "robodiffusion.safetensors",
-        },
-        {
-          name: "(NSFW) Corneo's 7th Heaven Mix -> Great for general use. Really good for NSFW.",
-          value: "corneos7thheavenmix.safetensors",
-        },
-        {
-          name: "Counterfeit-V2.5 -> Great for highly detailed SFW ~ soft NSFW anime pictures.",
-          value: "counterfeitV25.safetensors",
         },
         {
           name: "Pastel Mix -> Unique, pastel style pictures.",
@@ -35,6 +31,18 @@ export const data = new SlashCommandBuilder()
         {
           name: "Ligne Clair -> Great for 'Ghibli' style art. Strong lines, flat colors, low gradient.",
           value: "ligneclaire.safetensors",
+        },
+        {
+          name: "(NSFW) Corneo's 7th Heaven Mix -> Great for general use. Really good for NSFW.",
+          value: "corneos7thheavenmix.safetensors",
+        },
+        {
+          name: "(NSFW) Counterfeit-V2.5 -> Great for highly detailed SFW ~ soft NSFW anime pictures.",
+          value: "counterfeitV25.safetensors",
+        },
+        {
+          name: "(NSFW) Babes -> Generate babes. Mostly western style.",
+          value: "babes.safetensors",
         }
       )
   )
