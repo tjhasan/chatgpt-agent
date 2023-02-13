@@ -140,6 +140,10 @@ export async function execute(interaction) {
         ", ligne claire, flat color, limited palette, low contrast, high contrast, chromatic aberration";
       steps = 13;
       break;
+    case "babes.safetensors":
+      prompts += ", anatomical, dreamlikeart, glossy";
+      vae = "babes.vae.pt";
+      break;
   }
 
   options.args[0] = model;
