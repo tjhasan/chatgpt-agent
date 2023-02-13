@@ -104,6 +104,7 @@ export async function execute(interaction) {
   let prompt = interaction.options.getString("prompt");
   let negative_prompt = interaction.options.getString("negative_prompt");
   let seed = interaction.options.getString("seed");
+
   let sampler = "DPM++ 2M Karras";
   let steps = 20;
   let denoise_strength = 0.5;
@@ -123,6 +124,7 @@ export async function execute(interaction) {
       steps = 23;
       break;
     case "corneos7thheavenmix.safetensors":
+      sampler = "Euler a";
       steps = 30;
       cfg_scale = 10;
       break;
@@ -141,8 +143,9 @@ export async function execute(interaction) {
       steps = 13;
       break;
     case "babes.safetensors":
-      prompt += ", anatomical, dreamlikeart, glossy";
       vae = "babes.vae.pt";
+      steps = 24;
+      cfg_scale = 5;
       break;
   }
 
