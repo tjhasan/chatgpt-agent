@@ -141,7 +141,7 @@ export async function execute(interaction) {
       steps = 13;
       break;
     case "babes.safetensors":
-      prompts += ", anatomical, dreamlikeart, glossy";
+      prompt += ", anatomical, dreamlikeart, glossy";
       vae = "babes.vae.pt";
       break;
   }
