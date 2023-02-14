@@ -68,6 +68,43 @@ export const data = new SlashCommandBuilder()
       .setDescription(
         "What seed do you want to generate on? Can be a positive whole number. Default -1"
       )
+  )
+  .addStringOption((option) =>
+    option
+      .setName("lora")
+      .setDescription(
+        "Which Lora do you want to use? Use \\waifu-help for more info."
+      )
+      .addChoices(
+        {
+          name: "Nier Automata: 2B",
+          value: ", <lora:2b:0.8>",
+        },
+        {
+          name: "Genshin Impact: Kujou Sara",
+          value: ", <lora:kujousara:0.8>",
+        },
+        {
+          name: "Genshin Impact: Raiden Shogun",
+          value: ", <lora:raiden:0.8>",
+        },
+        {
+          name: "Cyberpunk: Lucy",
+          value: ", <lora:lucy:0.8>",
+        },
+        {
+          name: "Chainsaw Man: Makima",
+          value: ", <lora:makima:0.8>",
+        },
+        {
+          name: "Yofukashi No Uta: Nazuna",
+          value: ", <lora:nazuna:0.8>",
+        },
+        {
+          name: "Breath of the Wild: Princess Zelda",
+          value: ", <lora:princesszelda:0.8>",
+        }
+      )
   );
 
 let options = {
@@ -104,6 +141,7 @@ export async function execute(interaction) {
   let prompt = interaction.options.getString("prompt");
   let negative_prompt = interaction.options.getString("negative_prompt");
   let seed = interaction.options.getString("seed");
+  let lora = interaction.options.getString("lora");
 
   let sampler = "DPM++ 2M Karras";
   let steps = 20;
@@ -115,7 +153,9 @@ export async function execute(interaction) {
     seed = -1;
   }
 
-  console.log(seed);
+  if (lora != null) {
+    prompt += lora;
+  }
 
   switch (model) {
     case "robodiffusion.safetensors":
