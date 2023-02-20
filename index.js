@@ -28,6 +28,7 @@ import { execute as toggleLoopExecute } from "./commands/music/toggleLoop.js";
 import { execute as toggleQueueLoopExecute } from "./commands/music/toggleQueueLoop.js";
 import { execute as waifuExecute } from "./commands/waifu.js";
 import { execute as spotifyExecute } from "./commands/music/spotify.cjs";
+import { execute as pingExecute } from "./commands/ping.js";
 import { Player } from "discord-music-player";
 
 // intialize client
@@ -119,6 +120,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
   } else if (interaction.commandName == "spotify") {
     command = spotifyExecute;
     flag = true;
+  } else if (interaction.commandName == "ping") {
+    command = pingExecute;
   }
 
   if (!command) {
