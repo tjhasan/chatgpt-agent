@@ -48,7 +48,6 @@ client.on("ready", () => {
 });
 
 client.on("messageCreate", (msg) => {
-  console.log("in message");
   let variationTriggers = [
     "dalle variation",
     "dall-e variation",
