@@ -2,7 +2,7 @@ import { REST, Routes } from "discord.js";
 import "dotenv/config.js";
 
 import { data as chatGptData } from "./commands/chatgpt.js";
-import { data as dalleData } from "./commands/dall-e.js";
+import { data as dalleData } from "./commands/dalle/dall-e.js";
 import { data as chatgptvoiceData } from "./commands/chatgptvoice.js";
 import { data as clearQueueData } from "./commands/music/clearQueue.js";
 import { data as getQueueData } from "./commands/music/getQueue.js";
@@ -19,7 +19,7 @@ import { data as stopData } from "./commands/music/stop.js";
 import { data as toggleLoopData } from "./commands/music/toggleLoop.js";
 import { data as toggleQueueLoopData } from "./commands/music/toggleQueueLoop.js";
 import { data as waifuData } from "./commands/waifu.js";
-import { data as spotifyData} from "./commands/music/spotify.cjs"
+import { data as spotifyData } from "./commands/music/spotify.cjs";
 
 const commands = [];
 
