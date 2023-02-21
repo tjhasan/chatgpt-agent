@@ -59,10 +59,7 @@ client.on("messageCreate", (msg) => {
     } else if (msg.attachments.size == 0) {
       msg.reply("You must provide an image to create a variation of.");
     } else if (msg.attachments.size == 1) {
-      let result = variationExecute(
-        msg.attachments.at(0).name,
-        msg.attachments.at(0).url
-      );
+      await variationExecute(msg.attachments.at(0).name, msg.attachments.at(0).url);
     }
   }
 });
