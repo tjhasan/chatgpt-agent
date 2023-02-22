@@ -28,7 +28,6 @@ import { execute as toggleLoopExecute } from "./commands/music/toggleLoop.js";
 import { execute as toggleQueueLoopExecute } from "./commands/music/toggleQueueLoop.js";
 import { execute as waifuExecute } from "./commands/waifu.js";
 import { execute as spotifyExecute } from "./commands/music/spotify.cjs";
-import { execute as variationExecute } from "./commands/dalle/variation.js";
 import { Player } from "discord-music-player";
 
 // intialize client
@@ -45,23 +44,6 @@ const client = new Client({
 // client auth
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`);
-});
-
-client.on("messageCreate", (msg) => {
-  let variationTriggers = [
-    "dalle variation",
-    "dall-e variation",
-    "dall e variation",
-  ];
-  if (variationTriggers.indexOf(msg.content.toLowerCase()) > -1) {
-    if (msg.attachments.size > 1) {
-      msg.reply("You can only create variations 1 image at a time.");
-    } else if (msg.attachments.size == 0) {
-      msg.reply("You must provide an image to create a variation of.");
-    } else if (msg.attachments.size == 1) {
-      await variationExecute(msg.attachments.at(0).name, msg.attachments.at(0).url);
-    }
-  }
 });
 
 // set up player for the music bot functionality
@@ -137,8 +119,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
   } else if (interaction.commandName == "spotify") {
     command = spotifyExecute;
     flag = true;
-  } else if (interaction.commandName == "variation") {
-    command = variationExecute;
   }
 
   if (!command) {
